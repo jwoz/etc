@@ -39,6 +39,50 @@
 (flycheck-ycmd-setup)
 (add-hook 'c++-mode-hook 'flycheck-mode)
 
+;; ggtags
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode 1))))
+
+(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
+;;;; helm
+;; ;; helm
+;; (require 'helm-config)
+;; (helm-mode 1)
+
+;; ;;; Enable helm-gtags-mode
+;; (add-hook 'c-mode-hook 'helm-gtags-mode)
+;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
+;; (add-hook 'asm-mode-hook 'helm-gtags-mode)
+
+;; ;; customize
+;; (custom-set-variables
+;;  '(helm-gtags-path-style 'relative)
+;;  '(helm-gtags-ignore-case t)
+;;  '(helm-gtags-auto-update t))
+
+;; ;; key bindings
+;; (with-eval-after-load 'helm-gtags
+;;   (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+;;   (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-find-tag)
+;;   (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+;;   (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+;;   (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
+;;   (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+;;   (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+;;   (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; https://stackoverflow.com/questions/34117163/how-to-have-company-mode-irony-backend-and-irony-header-work-in-emacs
 ;; for irony....
@@ -71,7 +115,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck-clang-tidy flycheck-ycmd use-package company-ycmd))))
+    (helm-gtags flycheck-clang-tidy flycheck-ycmd use-package company-ycmd))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
