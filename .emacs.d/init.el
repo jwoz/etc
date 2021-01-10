@@ -34,7 +34,10 @@
 (require 'company-ycmd)
 (company-ycmd-setup)
 
-
+;; flycheck
+(require 'flycheck-ycmd)
+(flycheck-ycmd-setup)
+(add-hook 'c++-mode-hook 'flycheck-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; https://stackoverflow.com/questions/34117163/how-to-have-company-mode-irony-backend-and-irony-header-work-in-emacs
@@ -68,7 +71,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-c-headers company-irony ggtags use-package company))))
+    (flycheck-clang-tidy flycheck-ycmd use-package company-ycmd))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
