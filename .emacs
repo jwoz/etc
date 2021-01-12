@@ -11,6 +11,10 @@
 
 (tool-bar-mode 0)
 
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-c w") 'delete-trailing-whitespace)
+
+
 ;; packages
 (require 'package)
 (add-to-list 'package-archives
@@ -34,6 +38,8 @@
 ;; ycmd
 ;; https://github.com/abingham/emacs-ycmd
 ;; https://github.com/ycm-core/ycmd#building
+;; > git submodule update --init --recursive
+;; > python3 build.py --all|--clang-completer
 (require 'ycmd)
 (add-hook 'after-init-hook #'global-ycmd-mode)
 (add-hook 'c++-mode-hook 'ycmd-mode)
@@ -94,31 +100,6 @@
 ;;   (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
 ;;   (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 ;;   (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; https://stackoverflow.com/questions/34117163/how-to-have-company-mode-irony-backend-and-irony-header-work-in-emacs
-;; for irony....
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;(setq company-backends (delete 'company-semantic company-backends))
-;; (define-key c-mode-map  [(tab)] 'company-complete)
-;;(define-key c++-mode-map  [(tab)] 'company-complete)
-
-;; (add-to-list 'company-backends 'company-c-headers)
-;; (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
-
-;; To retrieve completion candidates for your projects, you will have to tell Clang where your include paths are.
-;; Create a file named .dir-locals.el at your project root:
-;; ((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
-;;				     "-I/home/<user>/project_root/include2/")))))
-
-
-
-;; projectile
-;;(projectile-mode +1)
-;;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 
 (custom-set-variables
