@@ -1,7 +1,15 @@
 ;; general settings
-(setq tab-width 2)
+(setq tab-width 4)
 (setq-default fill-column 120)
 (setq-default show-trailing-whitespace t)
+
+(setq-default c-basic-offset 4
+              tab-width 4
+              indent-tabs-mode nil)
+
+(setq c-default-style "stroustrup")
+
+(tool-bar-mode 0)
 
 ;; packages
 (require 'package)
@@ -38,6 +46,11 @@
 (require 'flycheck-ycmd)
 (flycheck-ycmd-setup)
 (add-hook 'c++-mode-hook 'flycheck-mode)
+
+;; projectile
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p) 'projectile-command-map)
 
 ;; ggtags
 (require 'ggtags)
