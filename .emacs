@@ -43,15 +43,33 @@
 (require 'ycmd)
 (add-hook 'after-init-hook #'global-ycmd-mode)
 (add-hook 'c++-mode-hook 'ycmd-mode)
-(set-variable 'ycmd-server-command '("python" "/home/juergen/github/ycmd/ycmd"))
+(set-variable 'ycmd-server-command '("python" "/home/juergen/git/ycmd/ycmd"))
 
 (require 'company-ycmd)
 (company-ycmd-setup)
+
+;; company-jedi
+(defun company-jedi-setup ()
+  (add-to-list 'company-backends 'company-jedi))
+(add-hook 'python-mode-hook 'company-jedi-setup)
+
+(setq jedi:setup-keys t)
+(setq jedi:complete-on-dot t)
+(add-hook 'python-mode-hook 'jedi:setup)
+
+;; py autopep
+(require 'py-autopep8)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+(setq py-autopep8-options '("--max-line-length=200"))
 
 ;; flycheck
 (require 'flycheck-ycmd)
 (flycheck-ycmd-setup)
 (add-hook 'c++-mode-hook 'flycheck-mode)
+
+(add-hook 'after-init-hook 'global-flycheck-mode)
+(setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
+
 
 ;; projectile
 (projectile-mode +1)
@@ -107,9 +125,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (helm-gtags flycheck-clang-tidy flycheck-ycmd use-package company-ycmd))))
+    (jedi py-autopep8 company-jedi helm-gtags flycheck-clang-tidy flycheck-ycmd use-package company-ycmd))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
